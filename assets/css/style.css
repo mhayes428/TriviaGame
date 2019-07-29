@@ -1,7 +1,9 @@
 body{
-	background: url('../images/scroll-bg.jpg');
+	background: url('../images/middle-earth2.jpg');
 	font-family: 'Raleway', sans-serif;
     font-size: 25px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 

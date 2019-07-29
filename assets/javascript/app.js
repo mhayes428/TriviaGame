@@ -4,15 +4,16 @@ var triviaQuestions = [{
 	answer: 1
 },{
 	question: "He is known by the name 'Strider'. He is a ranger, a hero, and later becomes King, name this man!",
-	answerList: ["Aragorn", "Legolas", "Gandalf", "Faromir"],
+    answerList: ["Aragorn", "Legolas", "Gandalf", "Faromir"],
+    answer: 0
 },{
 	question: "Who starts as the 'Gray Wizard' and later becomes the 'White Wizard'?",
 	answerList: ["Boromir", "Sauron", "Sarumon", "Gandalf"],
-	answer: 0
+	answer: 3
 },{
 	question: "Who is Frodo's best friend?",
 	answerList: ["Samwise Gamgee", "Merry", "Pippin", "Gimli"],
-	answer: 2
+	answer: 0
 },{
 	question: "What is the name of the hellish beast in The Fellowship of the Ring that Gandalf must hold off as the rest of the adventurers escape?",
 	answerList: ["Balroc", "Goblin King", "Cave troll", "Warg"],
@@ -20,22 +21,22 @@ var triviaQuestions = [{
 },{
 	question: "How many Lord of the Rings movies were released?",
 	answerList: ["1", "4", "2", "3"],
-	answer: 0
+	answer: 3
 },{
 	question: "He is Ned Stark in 'Game of Thrones', but which character does Sean Bean play in Lord of the Rings?",
 	answerList: ["Faromir", "Aragorn", "Legolas", "Boromir"],
-	answer: 1
+	answer: 3
 },{
 	question: "Who directed the Lord of the Rings trilogy?",
 	answerList: ["Peter Jackson", "Steven Spielburg", "George Lucas", "Uwe Boll"],
-	answer: 2
+	answer: 0
 },{
 	question: "Name the fortress where our heroes make their final stand in The Two Towers movie.",
 	answerList: ["Minas Tirith", "Dale", "Helm's Deep", "Minas Morgul"],
-	answer: 1
+	answer: 2
 },];
 
-var gifArray = ['question1', 'question2', 'question3', 'question4', 'question5', 'question6', 'question7', 'question8', 'question9', 'question10', 'question11', 'question12', 'question13','question14','question15'];
+var gifArray = ['question1', 'question2', 'question3', 'question4', 'question5', 'question6', 'question7', 'question8', 'question9'];
 var currentQuestion; var correctAnswer; var incorrectAnswer; var unanswered; var seconds; var time; var answered; var userSelect;
 var messages = {
 	correct: "Correctomundoooo!",
@@ -72,7 +73,7 @@ function newQuestion(){
 	$('#gif').empty();
 	answered = true;
 	
-	//sets up new questions & answerList
+	
 	$('#currentQuestion').html('Question #'+(currentQuestion+1)+'/'+triviaQuestions.length);
 	$('.question').html('<h2>' + triviaQuestions[currentQuestion].question + '</h2>');
 	for(var i = 0; i < 4; i++){
@@ -83,7 +84,7 @@ function newQuestion(){
 		$('.answerList').append(choices);
 	}
 	countdown();
-	//clicking an answer will pause the time and setup answerPage
+	
 	$('.thisChoice').on('click',function(){
 		userSelect = $(this).data('index');
 		clearInterval(time);
@@ -117,7 +118,7 @@ function answerPage(){
 	var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
 	var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
 	$('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestion] +'.gif" width = "400px">');
-	//checks to see correct, incorrect, or unanswered
+	
 	if((userSelect == rightAnswerIndex) && (answered == true)){
 		correctAnswer++;
 		$('#message').html(messages.correct);
