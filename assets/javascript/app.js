@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
     $("#remaining-time").hide();
-    $("#start").on('click', trivia.startGame);
-    $(document).on('click', '.option', trivia.guessChecker);
+    $("#start").on("click", trivia.startGame);
+    $(document).on("click", ".option", trivia.guessChecker);
 
 })
 
@@ -69,8 +69,8 @@ nextQuestion = function() {
 
     // set timer to 20 seconds each question
     trivia.timer = 10;
-    $('#timer').removeClass('last-seconds');
-    $('#timer').text(trivia.timer);
+    $("#timer").removeClass("last-seconds");
+    $("#timer").text(trivia.timer);
 
     // to prevent timer speed up
     if (!trivia.timerOn) {
@@ -86,7 +86,7 @@ nextQuestion = function() {
 
     // creates all the trivia guess options in the html
     $.each(questionOptions, function (index, key) {
-        $('#options').append($('<button class="option btn btn-info btn-lg">' + key + '</button>'));
+        $("#options").append($("<button class='option btn btn-info btn-lg'>" + key + "</button>"));
     })
 
 },
