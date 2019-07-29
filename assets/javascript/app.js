@@ -17,7 +17,7 @@ var triviaQuestions = [{
 },{
 	question: "What is the name of the hellish beast in The Fellowship of the Ring that Gandalf must hold off as the rest of the adventurers escape?",
 	answerList: ["Balroc", "Goblin King", "Cave troll", "Warg"],
-	answer: 3
+	answer: 0
 },{
 	question: "How many Lord of the Rings movies were released?",
 	answerList: ["1", "4", "2", "3"],
