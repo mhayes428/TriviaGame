@@ -91,32 +91,39 @@ startGame: function() {
     
 },
   
-  timerRunning: function(){
-    if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length){
-      $('#timer').text(trivia.timer);
-      trivia.timer--;
-        if(trivia.timer === 4){
-          $('#timer').addClass('last-seconds');
+timerRunning: function() {
+    if (trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
+        $('#timer').text(trivia.timer);
+        trivia.timer--;
+        if (trivia.timer === 4) {
+            $('#timer').addClass('last-seconds');
         }
     }
-      // result if time runs out
-    else if(trivia.timer === -1){
+    // result if time runs out
+    else if (trivia.timer === -1) {
         trivia.unanswered++;
         trivia.result = false;
         clearInterval(trivia.timerId);
         resultId = setTimeout(trivia.guessResult, 1000);
-        $('#results').html('<h3>Out of time! The answer was '+ Object.values(trivia.answers)[trivia.currentSet] +'</h3>');
+        $('#results').html('<h3>Sorry you are out of time! The answer was ' + Object.values(trivia.answers)[trivia.currentSet] + '</h3>');
     }
-      // show results if game ends
-    else if(trivia.currentSet === Object.keys(trivia.questions).length){
+    // show results if game ends
+    else if (trivia.currentSet === Object.keys(trivia.questions).length) {
       
         // game results
         $('#results')
-          .html('<h3>Thank you for playing!</h3>'+
-          '<p>Correct: '+ trivia.correct +'</p>'+
-          '<p>Incorrect: '+ trivia.incorrect +'</p>'+
-          '<p>Unaswered: '+ trivia.unanswered +'</p>'+
-              '<p>Please play again!</p>');
+            .html('<h3>Thanks for playing!</h3>' +
+                '<p>Correct: ' + trivia.correct + '</p>' +
+                '<p>Incorrect: ' + trivia.incorrect + '</p>' +
+                '<p>Unaswered: ' + trivia.unanswered + '</p>' +
+                '<p>Please play again!</p>');
         
-        
+        // hide game
+        $("#game").hide();
+
+        // allows you to start game again
+        $("#start").show();
+    }
+      
+},
         
