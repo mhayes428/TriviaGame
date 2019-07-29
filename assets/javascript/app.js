@@ -3,7 +3,7 @@ var triviaQuestions = [{
     answerList: ["Frodo", "Smeagol", "Strider", "Bilbo"],
     answer: 1
 }, {
-    question: "He is known by the name 'Strider'. He is a ranger, a hero, and later becomes King. Name this man!",
+    question: "He is known by the name 'Strider'. He is a ranger, an exceptional warrior, and later becomes King. Name this man!",
     answerList: ["Aragorn", "Legolas", "Gandalf", "Faromir"],
     answer: 0
 }, {
