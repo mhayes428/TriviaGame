@@ -99,11 +99,24 @@ startGame: function() {
           $('#timer').addClass('last-seconds');
         }
     }
-      
+      // result if time runs out
     else if(trivia.timer === -1){
         trivia.unanswered++;
         trivia.result = false;
         clearInterval(trivia.timerId);
         resultId = setTimeout(trivia.guessResult, 1000);
         $('#results').html('<h3>Out of time! The answer was '+ Object.values(trivia.answers)[trivia.currentSet] +'</h3>');
-      }
+    }
+      // show results if game ends
+    else if(trivia.currentSet === Object.keys(trivia.questions).length){
+      
+        // game results
+        $('#results')
+          .html('<h3>Thank you for playing!</h3>'+
+          '<p>Correct: '+ trivia.correct +'</p>'+
+          '<p>Incorrect: '+ trivia.incorrect +'</p>'+
+          '<p>Unaswered: '+ trivia.unanswered +'</p>'+
+              '<p>Please play again!</p>');
+        
+        
+        
