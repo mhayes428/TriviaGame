@@ -117,7 +117,7 @@ function answerPage() {
 
     var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
     var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
-    $("#gif").html("<img src = 'assets/images/smeagol-gif.gif'" + gifArray[currentQuestion] + '.gif" width = "400px">');
+    $("#gif").html("<img src = 'assets/images/gandalf-gif.gif'" + gifArray[currentQuestion] + '.gif" width = "400px">');
 
     if ((userSelect == rightAnswerIndex) && (answered == true)) {
         correctAnswer++;
