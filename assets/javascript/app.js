@@ -35,3 +35,31 @@ var trivia = {
         q4: "Nazgul"
     }
 }
+
+startGame: function() {
+    trivia.currentSet = 0;
+    trivia.correct = 0;
+    trivia.incorrect = 0;
+    trivia.unanswered = 0;
+    clearInterval(trivia.timerId);
+
+    // game section
+    $("#game").show();
+
+
+    // last results
+    $("#results").html();
+
+    // showing timer
+    $("#timer").text(trivia.timer);
+
+    // gets rid of start button
+    $("#start").hide();
+
+    // shows remaining time
+    $("#remaining-time").show();
+
+    // initialize first question
+    trivia.nextQuestion();
+
+},
