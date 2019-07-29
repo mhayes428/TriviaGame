@@ -141,7 +141,6 @@ guessChecker = function() {
         $('#results').html('<h3>Better luck next time! ' + currentAnswer + '</h3>');
     }
 
-    var guessResult;
 
     guessResult = function() {
 
