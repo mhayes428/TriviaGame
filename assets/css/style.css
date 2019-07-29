@@ -2,7 +2,8 @@ body{
 	background: url('../images/scrollBG4.jpg');
 	font-family: 'Raleway', sans-serif;
     font-size: 25px;
-    object-fit: cover;
+    background-position: left top;
+    background-repeat: no-repeat
 }
 
 header{
