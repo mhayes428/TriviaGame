@@ -3,8 +3,6 @@ body{
 	font-family: 'Raleway', sans-serif;
     font-size: 25px;
     object-fit: cover;
-    max-width: 100px;
-    max-height: 150px;
 }
 
 header{
