@@ -36,7 +36,7 @@ var trivia = {
     }
 }
 
-startGame: function() {
+startGame = function() {
     trivia.currentSet = 0;
     trivia.correct = 0;
     trivia.incorrect = 0;
@@ -65,7 +65,7 @@ startGame: function() {
 },
 
 // method to loop through and display questions and options 
-nextQuestion: function() {
+nextQuestion = function() {
 
     // set timer to 20 seconds each question
     trivia.timer = 10;
@@ -91,7 +91,7 @@ nextQuestion: function() {
 
 },
 
-timerRunning: function() {
+timerRunning = function() {
     if (trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
         $('#timer').text(trivia.timer);
         trivia.timer--;
@@ -127,7 +127,7 @@ timerRunning: function() {
 
 },
 
-guessChecker: function() {
+guessChecker = function() {
     var resultId;
     // answer to question asked
     var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
@@ -136,8 +136,24 @@ guessChecker: function() {
         $(this).addClass("btn-success").removeClass("btn-info");
 
         trivia.correct++;
-        clearInterval(trivia.timer
-        
+        clearInterval(trivia.timerId);
+        resultId = setTimeout(trivia.guessResult, 1000);
+        $('#results').html('<h3>Better luck next time! ' + currentAnswer + '</h3>');
+    }
+
+    var guessResult;
+
+    guessResult = function() {
+
+        // increment to next question set
+        trivia.currentSet++;
+
+        // remove the options and results
+        $('.option').remove();
+        $('#results h3').remove();
+
+        // begin next question
+        trivia.nextQuestion();
+
     }
 }
-
