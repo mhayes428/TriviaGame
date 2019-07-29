@@ -1,11 +1,11 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
     $("#remaining-time").hide();
     $("#start").on('click', trivia.startGame);
     $(document).on('click', '.option', trivia.guessChecker);
-    
+
 })
-  
+
 var trivia = {
     correct: 0,
     incorrect: 0,
@@ -14,7 +14,7 @@ var trivia = {
     timer: 20,
     timerOn: false,
     timerId: "",
-    
+
     questions: {
         q1: "Who refers to The Ring as 'My precious'?",
         q2: "What is Gollum's actual birth name?",
@@ -64,33 +64,33 @@ startGame: function() {
 
 },
 
-  // method to loop through and display questions and options 
-  nextQuestion : function(){
-    
+// method to loop through and display questions and options 
+nextQuestion: function() {
+
     // set timer to 20 seconds each question
     trivia.timer = 10;
-     $('#timer').removeClass('last-seconds');
+    $('#timer').removeClass('last-seconds');
     $('#timer').text(trivia.timer);
-    
+
     // to prevent timer speed up
-    if(!trivia.timerOn){
-      trivia.timerId = setInterval(trivia.timerRunning, 1000);
+    if (!trivia.timerOn) {
+        trivia.timerId = setInterval(trivia.timerRunning, 1000);
     }
-    
+
     // gets all the questions then indexes the current questions
     var questionContent = Object.values(trivia.questions)[trivia.currentSet];
     $('#question').text(questionContent);
-    
+
     // an array of all the user options for the current question
     var questionOptions = Object.values(trivia.options)[trivia.currentSet];
-    
+
     // creates all the trivia guess options in the html
-    $.each(questionOptions, function(index, key){
-      $('#options').append($('<button class="option btn btn-info btn-lg">'+key+'</button>'));
+    $.each(questionOptions, function (index, key) {
+        $('#options').append($('<button class="option btn btn-info btn-lg">' + key + '</button>'));
     })
-    
+
 },
-  
+
 timerRunning: function() {
     if (trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
         $('#timer').text(trivia.timer);
@@ -109,7 +109,7 @@ timerRunning: function() {
     }
     // show results if game ends
     else if (trivia.currentSet === Object.keys(trivia.questions).length) {
-      
+
         // game results
         $('#results')
             .html('<h3>Thanks for playing!</h3>' +
@@ -117,13 +117,27 @@ timerRunning: function() {
                 '<p>Incorrect: ' + trivia.incorrect + '</p>' +
                 '<p>Unaswered: ' + trivia.unanswered + '</p>' +
                 '<p>Please play again!</p>');
-        
+
         // hide game
         $("#game").hide();
 
         // allows you to start game again
         $("#start").show();
     }
-      
+
 },
+
+guessChecker: function() {
+    var resultId;
+    // answer to question asked
+    var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
+
+    if ($(this).text() === currentAnswer) {
+        $(this).addClass("btn-success").removeClass("btn-info");
+
+        trivia.correct++;
+        clearInterval(trivia.timer
         
+    }
+}
+
