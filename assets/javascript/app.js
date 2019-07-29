@@ -89,10 +89,9 @@ startGame: function() {
       $('#options').append($('<button class="option btn btn-info btn-lg">'+key+'</button>'));
     })
     
-  },
-  // method to decrement counter and count unanswered if timer runs out
-  timerRunning : function(){
-    // if timer still has time left and there are still questions left to ask
+},
+  
+  timerRunning: function(){
     if(trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length){
       $('#timer').text(trivia.timer);
       trivia.timer--;
@@ -100,3 +99,11 @@ startGame: function() {
           $('#timer').addClass('last-seconds');
         }
     }
+      
+    else if(trivia.timer === -1){
+        trivia.unanswered++;
+        trivia.result = false;
+        clearInterval(trivia.timerId);
+        resultId = setTimeout(trivia.guessResult, 1000);
+        $('#results').html('<h3>Out of time! The answer was '+ Object.values(trivia.answers)[trivia.currentSet] +'</h3>');
+      }
