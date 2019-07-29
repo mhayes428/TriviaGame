@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Lord of the Rings Trivia</title>
-    <link href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap" rel="stylesheet">
-    <link href="assets/css/reset.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
+    <link
+      href="https://fonts.googleapis.com/css?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/css/reset.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <img src='assets/images/lotrbanner3.jpg' alt='headerImg' width='100%'>
-        <h1 style='text-align: center'>Lord of the Rings: Return of the Quiz</h1>
-        <h2 style="text-align: center">Let's see how nerdy you really are...</h2>
+      <img src="assets/images/lotrbanner3.jpg" alt="headerImg" width="100%" />
+      <h1 style="text-align: center">Lord of the Rings: Return of the Quiz</h1>
+      <h2 style="text-align: center">Let's see how nerdy you really are...</h2>
     </header>
-    <div class='container'>
-        <button class='btn btn-primary' id='startBtn'>Start</button>
+    <div class="container">
+      <button class="btn btn-primary" id="startBtn">Start</button>
 
-        <div id=timeLeft></div>
-        <div id=currentQuestion></div>
-        <div class='question'></div>
-        <div class='answerList'></div>
+      <div id="timeLeft"></div>
+      <div id="currentQuestion"></div>
+      <div class="question"></div>
+      <div class="answerList"></div>
 
-        <div id=message></div>
-        <div id=correctedAnswer></div>
-        <div id=gif></div>
+      <div id="message"></div>
+      <div id="correctedAnswer"></div>
+      <div id="gif"></div>
 
-        <!-- answers -->
-        <div id=finalMessage></div>
-        <div id=correctAnswers></div>
-        <div id=incorrectAnswers></div>
-        <div id=unanswered></div>
-        <div id='startOverBtn'></div>
+      <!-- answers -->
+      <div id="finalMessage"></div>
+      <div id="correctAnswers"></div>
+      <div id="incorrectAnswers"></div>
+      <div id="unanswered"></div>
+      <div id="startOverBtn"></div>
     </div>
 
-    <h3> Enjoy the music!</h3>
+    <h3>Enjoy the music!</h3>
     <audio controls>
-            <source src="assets/audio/UrukHai.mp3" type="audio/mpeg">
-          Your browser does not support the audio element.
-          </audio>
+      <source src="assets/audio/UrukHai.mp3" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
 
     <script src="https://code.jquery.com/jquery.js"></script>
     <script type="text/javascript" src="assets/javascript/app.js"></script>
-</body>
-
+  </body>
 </html>
