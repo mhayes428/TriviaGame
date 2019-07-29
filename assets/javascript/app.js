@@ -1,158 +1,156 @@
-$(document).ready(function () {
+var triviaQuestions = [{
+	question: "What was the birth name given to Gollum?",
+	answerList: ["Frodo", "Smeagol", "Strider", "Bilbo"],
+	answer: 1
+},{
+	question: "He is known by the name 'Strider'. He is a ranger, a hero, and later becomes King, name this man!",
+	answerList: ["Aragorn", "Legolas", "Gandalf", "Faromir"],
+},{
+	question: "Who starts as the 'Gray Wizard' and later becomes the 'White Wizard'?",
+	answerList: ["Boromir", "Sauron", "Sarumon", "Gandalf"],
+	answer: 0
+},{
+	question: "Who is Frodo's best friend?",
+	answerList: ["Samwise Gamgee", "Merry", "Pippin", "Gimli"],
+	answer: 2
+},{
+	question: "What is the name of the hellish beast in The Fellowship of the Ring that Gandalf must hold off as the rest of the adventurers escape?",
+	answerList: ["Balroc", "Goblin King", "Cave troll", "Warg"],
+	answer: 3
+},{
+	question: "How many Lord of the Rings movies were released?",
+	answerList: ["1", "4", "2", "3"],
+	answer: 0
+},{
+	question: "He is Ned Stark in 'Game of Thrones', but which character does Sean Bean play in Lord of the Rings?",
+	answerList: ["Faromir", "Aragorn", "Legolas", "Boromir"],
+	answer: 1
+},{
+	question: "Who directed the Lord of the Rings trilogy?",
+	answerList: ["Peter Jackson", "Steven Spielburg", "George Lucas", "Uwe Boll"],
+	answer: 2
+},{
+	question: "Name the fortress where our heroes make their final stand in The Two Towers movie.",
+	answerList: ["Minas Tirith", "Dale", "Helm's Deep", "Minas Morgul"],
+	answer: 1
+},];
 
-    $("#remaining-time").hide();
-    $("#start").on("click", trivia.startGame);
-    $(document).on("click", ".option", trivia.guessChecker);
-
-})
-
-var trivia = {
-    correct: 0,
-    incorrect: 0,
-    unanswered: 0,
-    currentSet: 0,
-    timer: 20,
-    timerOn: false,
-    timerId: "",
-
-    questions: {
-        q1: "Who refers to The Ring as 'My precious'?",
-        q2: "What is Gollum's actual birth name?",
-        q3: "Where does The Ring have to be destroyed?",
-        q4: "They are known as 'Ringwraiths, Black Riders, and 'the Nine', but what is their true title?"
-
-    },
-    options: {
-        q1: ["Gollum", "Frodo Baggins", "Bilbo Baggins", "Samwise Gamgee"],
-        q2: ["Smeagol", "Strider", "Nazgul", "Sauron"],
-        q3: ["Mount Doom", "The Shire", "Dead Marshes", "Dale"],
-        q4: ["Nazgul", "Uruk-hai", "Wargs", "Fell beasts"]
-    },
-    answers: {
-        q1: "Gollum",
-        q2: "Smeagol",
-        q3: "Mount Doom",
-        q4: "Nazgul"
-    }
+var gifArray = ['question1', 'question2', 'question3', 'question4', 'question5', 'question6', 'question7', 'question8', 'question9', 'question10', 'question11', 'question12', 'question13','question14','question15'];
+var currentQuestion; var correctAnswer; var incorrectAnswer; var unanswered; var seconds; var time; var answered; var userSelect;
+var messages = {
+	correct: "Correctomundoooo!",
+	incorrect: "Nope!",
+	endTime: "FIN!",
+	finished: "How'd you do?"
 }
 
-startGame = function () {
-    trivia.currentSet = 0;
-    trivia.correct = 0;
-    trivia.incorrect = 0;
-    trivia.unanswered = 0;
-    clearInterval(trivia.timerId);
+$('#startBtn').on('click', function(){
+	$(this).hide();
+	newGame();
+});
 
-    // game section
-    $("#game").show();
+$('#startOverBtn').on('click', function(){
+	$(this).hide();
+	newGame();
+});
 
+function newGame(){
+	$('#finalMessage').empty();
+	$('#correctAnswers').empty();
+	$('#incorrectAnswers').empty();
+	$('#unanswered').empty();
+	currentQuestion = 0;
+	correctAnswer = 0;
+	incorrectAnswer = 0;
+	unanswered = 0;
+	newQuestion();
+}
 
-    // last results
-    $("#results").html();
+function newQuestion(){
+	$('#message').empty();
+	$('#correctedAnswer').empty();
+	$('#gif').empty();
+	answered = true;
+	
+	//sets up new questions & answerList
+	$('#currentQuestion').html('Question #'+(currentQuestion+1)+'/'+triviaQuestions.length);
+	$('.question').html('<h2>' + triviaQuestions[currentQuestion].question + '</h2>');
+	for(var i = 0; i < 4; i++){
+		var choices = $('<div>');
+		choices.text(triviaQuestions[currentQuestion].answerList[i]);
+		choices.attr({'data-index': i });
+		choices.addClass('thisChoice');
+		$('.answerList').append(choices);
+	}
+	countdown();
+	//clicking an answer will pause the time and setup answerPage
+	$('.thisChoice').on('click',function(){
+		userSelect = $(this).data('index');
+		clearInterval(time);
+		answerPage();
+	});
+}
 
-    // showing timer
-    $("#timer").text(trivia.timer);
+function countdown(){
+	seconds = 15;
+	$('#timeLeft').html('<h3>Time Remaining: ' + seconds + '</h3>');
+	answered = true;
+	//sets timer to go down
+	time = setInterval(showCountdown, 1000);
+}
 
-    // gets rid of start button
-    $("#start").hide();
+function showCountdown(){
+	seconds--;
+	$('#timeLeft').html('<h3>Time Remaining: ' + seconds + '</h3>');
+	if(seconds < 1){
+		clearInterval(time);
+		answered = false;
+		answerPage();
+	}
+}
 
-    // shows remaining time
-    $("#remaining-time").show();
+function answerPage(){
+	$('#currentQuestion').empty();
+	$('.thisChoice').empty(); //Clears question page
+	$('.question').empty();
 
-    // initialize first question
-    trivia.nextQuestion();
+	var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
+	var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
+	$('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestion] +'.gif" width = "400px">');
+	//checks to see correct, incorrect, or unanswered
+	if((userSelect == rightAnswerIndex) && (answered == true)){
+		correctAnswer++;
+		$('#message').html(messages.correct);
+	} else if((userSelect != rightAnswerIndex) && (answered == true)){
+		incorrectAnswer++;
+		$('#message').html(messages.incorrect);
+		$('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+	} else{
+		unanswered++;
+		$('#message').html(messages.endTime);
+		$('#correctedAnswer').html('The correct answer was: ' + rightAnswerText);
+		answered = true;
+	}
+	
+	if(currentQuestion == (triviaQuestions.length-1)){
+		setTimeout(scoreboard, 5000)
+	} else{
+		currentQuestion++;
+		setTimeout(newQuestion, 5000);
+	}	
+}
 
-},
+function scoreboard(){
+	$('#timeLeft').empty();
+	$('#message').empty();
+	$('#correctedAnswer').empty();
+	$('#gif').empty();
 
-    // method to loop through and display questions and options 
-    nextQuestion = function () {
-
-        // set timer to 20 seconds each question
-        trivia.timer = 10;
-        $("#timer").removeClass("last-seconds");
-        $("#timer").text(trivia.timer);
-
-        // to prevent timer speed up
-        if (!trivia.timerOn) {
-            trivia.timerId = setInterval(trivia.timerRunning, 1000);
-        }
-
-        // gets all the questions then indexes the current questions
-        var questionContent = Object.values(trivia.questions)[trivia.currentSet];
-        $('#question').text(questionContent);
-
-        // an array of all the user options for the current question
-        var questionOptions = Object.values(trivia.options)[trivia.currentSet];
-
-        // creates all the trivia guess options in the html
-        $.each(questionOptions, function (index, key) {
-            $("#options").append($("<button class='option btn btn-info btn-lg'>" + key + "</button>"));
-        })
-
-    },
-
-    timerRunning = function () {
-        if (trivia.timer > -1 && trivia.currentSet < Object.keys(trivia.questions).length) {
-            $('#timer').text(trivia.timer);
-            trivia.timer--;
-            if (trivia.timer === 4) {
-                $('#timer').addClass('last-seconds');
-            }
-        }
-        // result if time runs out
-        else if (trivia.timer === -1) {
-            trivia.unanswered++;
-            trivia.result = false;
-            clearInterval(trivia.timerId);
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h3>Sorry you are out of time! The answer was ' + Object.values(trivia.answers)[trivia.currentSet] + '</h3>');
-        }
-        // show results if game ends
-        else if (trivia.currentSet === Object.keys(trivia.questions).length) {
-
-            // game results
-            $('#results')
-                .html('<h3>Thanks for playing!</h3>' +
-                    '<p>Correct: ' + trivia.correct + '</p>' +
-                    '<p>Incorrect: ' + trivia.incorrect + '</p>' +
-                    '<p>Unaswered: ' + trivia.unanswered + '</p>' +
-                    '<p>Please play again!</p>');
-
-            // hide game
-            $("#game").hide();
-
-            // allows you to start game again
-            $("#start").show();
-        }
-
-    },
-
-    guessChecker = function () {
-        var resultId;
-        // answer to question asked
-        var currentAnswer = Object.values(trivia.answers)[trivia.currentSet];
-
-        if ($(this).text() === currentAnswer) {
-            $(this).addClass("btn-success").removeClass("btn-info");
-
-            trivia.correct++;
-            clearInterval(trivia.timerId);
-            resultId = setTimeout(trivia.guessResult, 1000);
-            $('#results').html('<h3>Better luck next time! ' + currentAnswer + '</h3>');
-        }
-
-
-        guessResult = function () {
-
-            // increment to next question set
-            trivia.currentSet++;
-
-            // remove the options and results
-            $('.option').remove();
-            $('#results h3').remove();
-
-            // begin next question
-            trivia.nextQuestion();
-
-        }
-    }
+	$('#finalMessage').html(messages.finished);
+	$('#correctAnswers').html("Correct Answers: " + correctAnswer);
+	$('#incorrectAnswers').html("Incorrect Answers: " + incorrectAnswer);
+	$('#unanswered').html("Unanswered: " + unanswered);
+	$('#startOverBtn').addClass('reset');
+	$('#startOverBtn').show();
+	$('#startOverBtn').html('Start Over?');
+}
