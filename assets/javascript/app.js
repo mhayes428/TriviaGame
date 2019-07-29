@@ -3,7 +3,7 @@ var triviaQuestions = [{
 	answerList: ["Frodo", "Smeagol", "Strider", "Bilbo"],
 	answer: 1
 },{
-	question: "He is known by the name 'Strider'. He is a ranger, a hero, and later becomes King, name this man!",
+	question: "He is known by the name 'Strider'. He is a ranger, a hero, and later becomes King. Name this man!",
     answerList: ["Aragorn", "Legolas", "Gandalf", "Faromir"],
     answer: 0
 },{
@@ -112,12 +112,12 @@ function showCountdown(){
 
 function answerPage(){
 	$('#currentQuestion').empty();
-	$('.thisChoice').empty(); //Clears question page
+	$('.thisChoice').empty(); 
 	$('.question').empty();
 
 	var rightAnswerText = triviaQuestions[currentQuestion].answerList[triviaQuestions[currentQuestion].answer];
 	var rightAnswerIndex = triviaQuestions[currentQuestion].answer;
-	$('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestion] +'.gif" width = "400px">');
+	$("#gif").html("<img src = 'assets/images/smeagol-gif.gif'" + gifArray[currentQuestion] +'.gif" width = "400px">');
 	
 	if((userSelect == rightAnswerIndex) && (answered == true)){
 		correctAnswer++;
