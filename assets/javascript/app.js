@@ -31,7 +31,7 @@ var triviaQuestions = [{
     answerList: ["Peter Jackson", "Steven Spielburg", "George Lucas", "Uwe Boll"],
     answer: 0
 }, {
-    question: "Name the fortress where our heroes make their final stand in The Two Towers movie.",
+    question: "Name the fortress where our heroes make their final stand in Lord of the Rings: The Two Towers movie.",
     answerList: ["Minas Tirith", "Dale", "Helm's Deep", "Minas Morgul"],
     answer: 2
 },];
