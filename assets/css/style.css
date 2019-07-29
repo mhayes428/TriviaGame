@@ -1,7 +1,8 @@
 body {
-  background: url("../images/scrollBG4.jpg");
+  background-image: url("../images/scrollBG4.jpg");
   font-family: "MedievalSharp", cursive;
   font-size: 25px;
+  background-size: cover;
 }
 
 header {
